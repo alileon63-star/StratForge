@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StratForge Financial Services | Financial Systems for South African Manufacturers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black:   #0E0F0D;
+      --charcoal:#1C1E1A;
+      --stone:   #2A2D26;
+      --iron:    #3D4138;
+      --sage:    #5C7A5A;
+      --green:   #2D6A4F;
+      --green-lt:#3D8B6E;
+      --mint:    #52B788;
+      --cream:   #F2EDE3;
+      --warm:    #D9C9B0;
+      --sand:    #A89880;
+      --rust:    #B5522A;
+      --rust-lt: #D4693A;
+      --line:    rgba(242,237,227,.08);
+      --line2:   rgba(242,237,227,.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Epilogue', sans-serif;
+      background: var(--black);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.6rem 5rem;
+      transition: all .4s;
+    }
+    nav.scrolled {
+      padding: 1rem 5rem;
+      background: rgba(14,15,13,.96);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
+    .logo-icon {
+      width: 34px; height: 34px; background: var(--mint); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .logo-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.15rem; font-weight: 700; color: var(--cream); letter-spacing: -.01em;
+    }
+    .logo-name span { color: var(--mint); }
+
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: .75rem; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--sand);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-cta {
+      padding: .55rem 1.4rem; background: var(--mint); color: var(--black) !important;
+      border-radius: 4px; font-weight: 600 !important; transition: background .2s !important;
+    }
+    .nav-cta:hover { background: #6DD5A8 !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 5rem 6rem;
+      position: relative; overflow: hidden;
+    }
+
+    /* Industrial texture background */
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        linear-gradient(160deg, var(--black) 40%, rgba(44,58,38,.6) 100%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          rgba(242,237,227,.015) 0px,
+          rgba(242,237,227,.015) 1px,
+          transparent 1px,
+          transparent 80px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(242,237,227,.015) 0px,
+          rgba(242,237,227,.015) 1px,
+          transparent 1px,
+          transparent 80px
+        );
+    }
+
+    /* Large background word */
+    .hero-word {
+      position: absolute; bottom: -2rem; right: -1rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(8rem, 18vw, 22rem);
+      font-weight: 700; color: rgba(242,237,227,.025);
+      line-height: 1; pointer-events: none; user-select: none;
+      letter-spacing: -.04em;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .35rem .9rem;
+      border: 1px solid rgba(82,183,136,.3);
+      border-radius: 3px;
+      font-size: .68rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--mint);
+      margin-bottom: 2.2rem;
+    }
+    .tag-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--mint);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    .hero-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2.8rem, 6vw, 6rem);
+      font-weight: 700; line-height: 1.02;
+      color: var(--cream); margin-bottom: 2rem;
+      letter-spacing: -.02em;
+    }
+    .hero-title em {
+      font-style: italic; color: var(--mint);
+    }
+
+    .hero-rule {
+      width: 60px; height: 2px; background: var(--mint);
+      margin-bottom: 2rem;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem; font-weight: 300; line-height: 1.8;
+      color: var(--warm); max-width: 540px; margin-bottom: 3rem;
+    }
+
+    .hero-bottom {
+      display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .7rem;
+      padding: 1rem 2.4rem;
+      background: var(--mint); color: var(--black);
+      font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      text-decoration: none; border-radius: 4px;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: #6DD5A8; transform: translateY(-2px); }
+
+    .hero-cred {
+      display: flex; align-items: center; gap: 1.2rem;
+    }
+    .hero-cred-divider { width: 1px; height: 32px; background: var(--line); }
+    .hero-cred-item {
+      font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--sand);
+      line-height: 1.4;
+    }
+    .hero-cred-item strong { display: block; color: var(--warm); font-weight: 600; }
+
+    /* ── ONE OFFER BAND ── */
+    .offer-band {
+      background: var(--green);
+      padding: 2.5rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .offer-band-left { display: flex; align-items: center; gap: 1.5rem; }
+    .offer-icon {
+      width: 48px; height: 48px; border-radius: 8px;
+      background: rgba(0,0,0,.2);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .offer-band-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--cream);
+    }
+    .offer-band-sub {
+      font-size: .82rem; color: rgba(242,237,227,.7); margin-top: .2rem;
+    }
+    .offer-band-cta {
+      display: inline-flex; align-items: center; gap: .6rem;
+      padding: .75rem 1.8rem;
+      background: var(--cream); color: var(--green);
+      font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; border-radius: 4px; white-space: nowrap;
+      transition: background .2s;
+    }
+    .offer-band-cta:hover { background: #fff; }
+
+    /* ── PROBLEM SECTION ── */
+    .problem-section {
+      padding: 7rem 5rem;
+      display: grid; grid-template-columns: 5fr 4fr; gap: 7rem;
+      align-items: start;
+    }
+
+    .problem-eyebrow {
+      font-size: .68rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--mint);
+      display: flex; align-items: center; gap: .5rem;
+      margin-bottom: 1.2rem;
+    }
+    .problem-eyebrow::before { content:''; width:16px; height:2px; background:var(--mint); border-radius:2px; }
+
+    .problem-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700; line-height: 1.15; color: var(--cream);
+      margin-bottom: 1.8rem;
+    }
+    .problem-title em { font-style: italic; color: var(--mint); }
+
+    .problem-body {
+      font-size: .95rem; line-height: 1.85; color: var(--warm);
+      margin-bottom: 2.5rem;
+    }
+
+    .pain-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+    .pain-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--rust);
+      background: rgba(255,255,255,.02);
+      border-radius: 0 4px 4px 0;
+      font-size: .88rem; line-height: 1.55; color: var(--warm);
+    }
+    .pain-item strong { color: var(--cream); display: block; margin-bottom: .2rem; }
+    .pain-num {
+      font-family: 'Libre Baskerville', serif;
+      font-size: .75rem; color: var(--rust); font-weight: 700;
+      flex-shrink: 0; margin-top: .05rem;
+    }
+
+    /* Right side - who this is for */
+    .for-box {
+      background: var(--charcoal);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      position: sticky; top: 7rem;
+    }
+    .for-box-header {
+      padding: 1.4rem 1.8rem;
+      background: var(--stone);
+      border-bottom: 1px solid var(--line);
+    }
+    .for-box-label {
+      font-size: .67rem; letter-spacing: .18em; text-transform: uppercase; color: var(--mint);
+    }
+    .for-box-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--cream);
+      margin-top: .4rem;
+    }
+    .for-items { padding: 1.4rem 1.8rem; display: flex; flex-direction: column; gap: .8rem; }
+    .for-item {
+      display: flex; align-items: flex-start; gap: .8rem;
+      font-size: .86rem; line-height: 1.55; color: var(--warm);
+    }
+    .for-check {
+      width: 20px; height: 20px; border-radius: 4px;
+      background: rgba(82,183,136,.12); border: 1px solid rgba(82,183,136,.25);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem;
+    }
+    .for-item strong { color: var(--cream); }
+    .for-divider { height: 1px; background: var(--line); margin: .4rem 0; }
+    .for-note {
+      padding: 1rem 1.8rem;
+      background: rgba(45,106,79,.15);
+      border-top: 1px solid rgba(82,183,136,.15);
+      font-size: .8rem; color: rgba(242,237,227,.6); line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ── OFFER SECTION ── */
+    .offer-section {
+      padding: 7rem 5rem;
+      background: var(--charcoal);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .offer-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: end; margin-bottom: 4rem;
+    }
+    .offer-eyebrow {
+      font-size: .68rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--rust-lt);
+      display: flex; align-items: center; gap: .5rem; margin-bottom: 1rem;
+    }
+    .offer-eyebrow::before { content:''; width:16px; height:2px; background:var(--rust-lt); }
+    .offer-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700; line-height: 1.12; color: var(--cream);
+    }
+    .offer-title em { font-style: italic; color: var(--mint); }
+    .offer-intro { font-size: .95rem; line-height: 1.85; color: var(--warm); padding-top: .5rem; }
+
+    .offer-card {
+      background: var(--black);
+      border: 1px solid var(--line);
+      border-radius: 10px; overflow: hidden;
+      position: relative;
+    }
+    .offer-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--mint));
+    }
+    .offer-card-body {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .offer-deliverables {
+      padding: 2.8rem;
+      border-right: 1px solid var(--line);
+    }
+    .offer-section-label {
+      font-size: .67rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--mint); margin-bottom: 1.2rem;
+    }
+    .deliverable-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+    .deliverable-item {
+      display: flex; align-items: flex-start; gap: .9rem;
+      font-size: .9rem; line-height: 1.55; color: var(--warm);
+    }
+    .d-check {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(82,183,136,.12); border: 1px solid rgba(82,183,136,.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: .05rem;
+    }
+
+    .offer-meta { padding: 2.8rem; display: flex; flex-direction: column; gap: 1rem; }
+    .meta-row {
+      padding: 1.1rem 1.3rem;
+      background: var(--charcoal);
+      border: 1px solid var(--line); border-radius: 6px;
+    }
+    .meta-label { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--sand); margin-bottom: .35rem; }
+    .meta-val { font-size: .92rem; color: var(--cream); font-weight: 500; }
+    .meta-val.accent { color: var(--mint); font-family: 'Libre Baskerville', serif; font-size: 1.1rem; font-weight: 700; }
+
+    .offer-card-footer {
+      padding: 1.8rem 2.8rem;
+      border-top: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+      background: rgba(45,106,79,.06);
+    }
+    .offer-card-footer-text {
+      font-size: .85rem; color: var(--warm); line-height: 1.55;
+    }
+    .offer-card-footer-text strong { color: var(--cream); }
+
+    /* ── SERVICES SECTION ── */
+    .services-section { padding: 7rem 5rem; }
+
+    .sec-header { margin-bottom: 4rem; }
+    .sec-eyebrow {
+      font-size: .68rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--mint);
+      display: flex; align-items: center; gap: .5rem; margin-bottom: 1rem;
+    }
+    .sec-eyebrow::before { content:''; width:16px; height:2px; background:var(--mint); }
+    .sec-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700; line-height: 1.12; color: var(--cream);
+    }
+    .sec-title em { font-style: italic; color: var(--mint); }
+    .sec-sub { font-size: .95rem; line-height: 1.8; color: var(--warm); margin-top: 1rem; max-width: 600px; }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--line);
+      border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+    }
+    .svc-card {
+      padding: 2.4rem;
+      background: var(--charcoal);
+      transition: background .25s;
+      position: relative;
+    }
+    .svc-card:hover { background: var(--stone); }
+    .svc-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--mint); opacity: 0; transition: opacity .25s;
+    }
+    .svc-card:hover::after { opacity: 1; }
+    .svc-num {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2rem; font-weight: 700;
+      color: rgba(242,237,227,.06); line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+    .svc-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--cream);
+      margin-bottom: .7rem; line-height: 1.25;
+    }
+    .svc-desc { font-size: .84rem; line-height: 1.75; color: var(--warm); margin-bottom: 1.2rem; }
+    .svc-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .svc-tag {
+      padding: .18rem .6rem;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      font-size: .66rem; letter-spacing: .06em; color: var(--sand);
+    }
+
+    /* Manufacturing card gets special treatment */
+    .svc-card.mfg { background: rgba(45,106,79,.12); border-left: 3px solid var(--mint); }
+    .svc-card.mfg .svc-num { color: rgba(82,183,136,.12); }
+
+    /* ── ABOUT / CREDENTIALS ── */
+    .about-section {
+      padding: 7rem 5rem;
+      background: var(--charcoal);
+      border-top: 1px solid var(--line);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: start;
+    }
+
+    .about-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700; line-height: 1.12; color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .about-title em { font-style: italic; color: var(--mint); }
+    .about-body { font-size: .92rem; line-height: 1.9; color: var(--warm); margin-bottom: 1.4rem; }
+
+    /* CGMA badge */
+    .cgma-badge {
+      display: inline-flex; align-items: center; gap: 1rem;
+      padding: .8rem 1.4rem;
+      background: rgba(45,106,79,.15); border: 1px solid rgba(82,183,136,.25);
+      border-radius: 6px; margin-bottom: 2rem;
+    }
+    .cgma-mark {
+      font-family: 'Libre Baskerville', serif;
+      font-size: .95rem; font-weight: 700;
+      background: var(--mint); color: var(--black);
+      padding: .2rem .6rem; border-radius: 3px;
+      letter-spacing: .04em; flex-shrink: 0;
+    }
+    .cgma-text-title { font-size: .85rem; font-weight: 600; color: var(--cream); }
+    .cgma-text-sub { font-size: .74rem; color: var(--sand); margin-top: .1rem; }
+
+    /* Competency grid */
+    .competency-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--line); border: 1px solid var(--line);
+      border-radius: 8px; overflow: hidden; margin-bottom: 2rem;
+    }
+    .comp-item {
+      padding: 1.2rem 1.4rem;
+      background: var(--black);
+      transition: background .25s;
+    }
+    .comp-item:hover { background: var(--stone); }
+    .comp-title { font-size: .84rem; font-weight: 600; color: var(--cream); margin-bottom: .25rem; }
+    .comp-desc { font-size: .76rem; color: var(--sand); line-height: 1.55; }
+    .comp-item.span2 { grid-column: span 2; border-top: 1px solid var(--line); }
+
+    .cred-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .cred-pill {
+      padding: .3rem .8rem;
+      background: var(--stone); border: 1px solid var(--line);
+      border-radius: 3px; font-size: .74rem; color: var(--warm);
+    }
+
+    /* Right side visual */
+    .about-right { display: flex; flex-direction: column; gap: 1.2rem; }
+    .about-stat-card {
+      padding: 1.8rem;
+      background: var(--black); border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .about-stat-card:first-child { border-left: 3px solid var(--mint); }
+    .stat-label { font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--mint); margin-bottom: .5rem; }
+    .stat-headline {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem; font-weight: 700; color: var(--cream);
+      margin-bottom: .5rem; line-height: 1.3;
+    }
+    .stat-body { font-size: .83rem; line-height: 1.65; color: var(--warm); }
+
+    .distinction-box {
+      padding: 1.6rem 1.8rem;
+      background: rgba(45,106,79,.12);
+      border: 1px solid rgba(82,183,136,.2);
+      border-radius: 8px;
+    }
+    .distinction-label { font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--mint); margin-bottom: .6rem; }
+    .distinction-text {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem; font-style: italic; color: var(--cream); line-height: 1.65;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .process-section { padding: 7rem 5rem; }
+
+    .process-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 4rem; }
+
+    .steps { display: flex; flex-direction: column; }
+    .step {
+      display: grid; grid-template-columns: 52px 1fr; gap: 1.5rem;
+      padding: 1.8rem 0; border-bottom: 1px solid var(--line2);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-left { display: flex; flex-direction: column; align-items: center; }
+    .step-circle {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid var(--line); background: var(--charcoal);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Libre Baskerville', serif;
+      font-size: .95rem; font-weight: 700; color: var(--mint);
+      flex-shrink: 0; transition: background .25s, border-color .25s;
+    }
+    .step:hover .step-circle { background: rgba(82,183,136,.1); border-color: rgba(82,183,136,.4); }
+    .step-connector { flex: 1; width: 1px; background: var(--line2); margin-top: 8px; }
+    .step:last-child .step-connector { display: none; }
+    .step-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem; font-weight: 700; color: var(--cream);
+      margin-bottom: .5rem; padding-top: .55rem;
+    }
+    .step-desc { font-size: .85rem; line-height: 1.75; color: var(--warm); }
+
+    /* Results */
+    .results-box {
+      background: var(--charcoal); border: 1px solid var(--line);
+      border-radius: 10px; overflow: hidden;
+      position: sticky; top: 7rem;
+    }
+    .results-header {
+      padding: 1.4rem 1.8rem; border-bottom: 1px solid var(--line);
+      background: var(--stone);
+    }
+    .results-header-label { font-size: .67rem; letter-spacing: .16em; text-transform: uppercase; color: var(--mint); }
+    .results-header-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem; font-weight: 700; color: var(--cream); margin-top: .3rem;
+    }
+    .result-items { padding: 1.4rem 1.8rem; display: flex; flex-direction: column; gap: .2rem; }
+    .result-item {
+      display: flex; align-items: flex-start; gap: .9rem;
+      padding: .9rem 0; border-bottom: 1px solid var(--line2);
+    }
+    .result-item:last-child { border-bottom: none; }
+    .result-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--mint);
+      flex-shrink: 0; margin-top: .45rem;
+    }
+    .result-text { font-size: .87rem; line-height: 1.6; color: var(--warm); }
+    .result-text strong { color: var(--cream); display: block; margin-bottom: .1rem; }
+
+    /* ── POSITIONING BAND ── */
+    .positioning-band {
+      background: var(--stone);
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 3rem 5rem;
+    }
+    .positioning-inner {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 3rem; align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .pos-label { font-size: .66rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--mint); margin-bottom: .8rem; }
+    .pos-quote {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem; font-style: italic; color: var(--cream); line-height: 1.65;
+      border-left: 3px solid var(--mint); padding-left: 1.2rem;
+    }
+    .pos-divider { width: 1px; height: 80px; background: var(--line); }
+    .pos-targets { display: flex; flex-direction: column; gap: .7rem; }
+    .pos-target { display: flex; align-items: center; gap: .7rem; font-size: .86rem; color: var(--warm); }
+    .pos-target-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); flex-shrink: 0; }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 7rem 5rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: start;
+    }
+
+    .contact-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700; line-height: 1.12; color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+    .contact-title em { font-style: italic; color: var(--mint); }
+    .contact-body { font-size: .92rem; line-height: 1.85; color: var(--warm); margin-bottom: 2.5rem; }
+
+    .contact-details { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .contact-item { display: flex; align-items: flex-start; gap: .9rem; }
+    .contact-icon {
+      width: 36px; height: 36px; border-radius: 6px;
+      border: 1px solid var(--line); background: var(--charcoal);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .contact-item-label { font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mint); margin-bottom: .15rem; }
+    .contact-item-val { font-size: .87rem; color: var(--warm); }
+
+    .free-call-box {
+      padding: 1.4rem;
+      background: rgba(45,106,79,.12);
+      border: 1px solid rgba(82,183,136,.2);
+      border-radius: 8px;
+    }
+    .free-call-title { font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--mint); margin-bottom: .5rem; }
+    .free-call-text { font-size: .84rem; color: var(--warm); line-height: 1.65; }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; }
+    .form-label { font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sand); }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: .82rem 1rem;
+      background: var(--charcoal); border: 1px solid var(--line);
+      border-radius: 4px; color: var(--cream);
+      font-family: 'Epilogue', sans-serif; font-size: .9rem;
+      outline: none; transition: border-color .2s, background .2s;
+    }
+    .form-input::placeholder { color: rgba(168,152,128,.35); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: rgba(82,183,136,.4); background: rgba(82,183,136,.04);
+    }
+    .form-select { appearance: none; cursor: pointer; }
+    .form-select option { background: var(--charcoal); }
+    .form-textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%; padding: 1rem;
+      background: var(--mint); color: var(--black);
+      font-family: 'Epilogue', sans-serif;
+      font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      border: none; border-radius: 4px; cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .form-submit:hover { background: #6DD5A8; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 5rem;
+      border-top: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo { display: flex; align-items: center; gap: .65rem; }
+    .footer-logo-icon { width: 28px; height: 28px; background: var(--mint); border-radius: 5px; display: flex; align-items: center; justify-content: center; }
+    .footer-logo-name { font-family: 'Libre Baskerville', serif; font-size: 1rem; font-weight: 700; color: var(--cream); }
+    .footer-logo-name span { color: var(--mint); }
+    .footer-copy { font-size: .74rem; color: rgba(168,152,128,.45); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: .74rem; color: rgba(168,152,128,.45); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--mint); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      nav { padding: 1.2rem 2.5rem; } nav.scrolled { padding: .9rem 2.5rem; }
+      .hero { padding: 0 2.5rem 5rem; }
+      .offer-band { padding: 2rem 2.5rem; }
+      .problem-section { grid-template-columns: 1fr; padding: 5rem 2.5rem; gap: 3rem; }
+      .for-box { position: static; }
+      .offer-section { padding: 5rem 2.5rem; }
+      .offer-header { grid-template-columns: 1fr; gap: 2rem; }
+      .offer-card-body { grid-template-columns: 1fr; }
+      .offer-deliverables { border-right: none; border-bottom: 1px solid var(--line); }
+      .services-section { padding: 5rem 2.5rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .about-section { grid-template-columns: 1fr; padding: 5rem 2.5rem; gap: 3rem; }
+      .process-section { padding: 5rem 2.5rem; }
+      .process-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .results-box { position: static; }
+      .positioning-band { padding: 2.5rem 2.5rem; }
+      .positioning-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .pos-divider { width: 100%; height: 1px; }
+      .contact-section { grid-template-columns: 1fr; padding: 5rem 2.5rem; gap: 3rem; }
+      footer { padding: 2rem 2.5rem; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.2rem; } .nav-links { display: none; }
+      .hero { padding: 0 1.5rem 4rem; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .offer-band { flex-direction: column; padding: 1.8rem 1.5rem; }
+      .problem-section, .offer-section, .services-section, .about-section, .process-section, .contact-section { padding: 4rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .competency-grid { grid-template-columns: 1fr; }
+      .comp-item.span2 { grid-column: span 1; }
+      .form-row { grid-template-columns: 1fr; }
+      .offer-card-footer { flex-direction: column; align-items: flex-start; }
+      footer { flex-direction: column; padding: 2rem 1.5rem; text-align: center; }
+      .positioning-band { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M3 13L7 7l3.5 3.5L15 3" stroke="#0E0F0D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="logo-name">StratForge<span> Financial</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#offer">Our Offer</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-word">FORGE</div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="tag-dot"></div>
+      Financial Systems · Manufacturing SMEs · South Africa
+    </div>
+    <h1 class="hero-title">
+      We fix financial<br>and operational systems<br>so SMEs can grow <em>profitably.</em>
+    </h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">
+      We use automation and smart tools to reduce manual work, improve reporting, and give you real control over your costs and cash flow — without the jargon.
+    </p>
+    <div class="hero-bottom">
+      <a href="#offer" class="btn-primary">
+        See Our One Offer
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 6.5h11M6.5 1l5.5 5.5-5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="hero-cred">
+        <div class="hero-cred-item">
+          <strong>BCom Accounting</strong>
+          Management Accounting
+        </div>
+        <div class="hero-cred-divider"></div>
+        <div class="hero-cred-item">
+          <strong>CGMA · CIMA Strategic</strong>
+          Chartered Global Mgmt. Accountant
+        </div>
+        <div class="hero-cred-divider"></div>
+        <div class="hero-cred-item">
+          <strong>Johannesburg</strong>
+          Serving SA Nationwide
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONE OFFER BAND -->
+<div class="offer-band">
+  <div class="offer-band-left">
+    <div class="offer-icon">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect x="2" y="5" width="18" height="13" rx="2" stroke="rgba(242,237,227,.7)" stroke-width="1.5"/>
+        <path d="M6 9h10M6 13h6" stroke="rgba(242,237,227,.7)" stroke-width="1.3" stroke-linecap="round"/>
+        <circle cx="17" cy="17" r="3.5" fill="#2D6A4F" stroke="#52B788" stroke-width="1.2"/>
+        <path d="M15.5 17l1 1 2-2" stroke="#52B788" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="offer-band-title">One entry point. One clear outcome.</div>
+      <div class="offer-band-sub">Finance System Review &amp; Improvement Plan — start here, everything else follows.</div>
+    </div>
+  </div>
+  <a href="#offer" class="offer-band-cta">
+    Learn More
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<!-- THE PROBLEM -->
+<div class="problem-section">
+  <div>
+    <div class="problem-eyebrow">The Problem</div>
+    <h2 class="problem-title">
+      Most SMEs are<br>running on <em>broken systems.</em>
+    </h2>
+    <p class="problem-body">
+      It's not that you're not working hard enough. The problem is that your financial and operational systems weren't built to support a growing, complex business — and the cracks are starting to show.
+    </p>
+    <ul class="pain-list">
+      <li class="pain-item">
+        <span class="pain-num">01</span>
+        <div>
+          <strong>Month-end takes too long</strong>
+          Reporting is late, manual, and error-prone. By the time the numbers are ready, the decisions have already been made.
+        </div>
+      </li>
+      <li class="pain-item">
+        <span class="pain-num">02</span>
+        <div>
+          <strong>You don't know your true costs</strong>
+          Especially in manufacturing — pricing decisions are guesswork because your costing model isn't accurate or up to date.
+        </div>
+      </li>
+      <li class="pain-item">
+        <span class="pain-num">03</span>
+        <div>
+          <strong>Revenue grows but margins shrink</strong>
+          You're busier than ever but the profit isn't there. Something is leaking — but you can't see where.
+        </div>
+      </li>
+      <li class="pain-item">
+        <span class="pain-num">04</span>
+        <div>
+          <strong>No real financial visibility</strong>
+          You're making decisions on gut feel or outdated reports. Real-time insight into cash flow and performance just doesn't exist.
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="for-box">
+      <div class="for-box-header">
+        <div class="for-box-label">This is for you if…</div>
+        <div class="for-box-title">Sound familiar?</div>
+      </div>
+      <div class="for-items">
+        <div class="for-item">
+          <div class="for-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#52B788" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div>You run a <strong>manufacturing or operational SME</strong> with real complexity in your numbers</div>
+        </div>
+        <div class="for-divider"></div>
+        <div class="for-item">
+          <div class="for-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#52B788" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div>You've <strong>outgrown spreadsheets</strong> but haven't yet moved to a structured system</div>
+        </div>
+        <div class="for-divider"></div>
+        <div class="for-item">
+          <div class="for-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#52B788" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div>Your team spends too much time on <strong>manual finance tasks</strong> that should be automated</div>
+        </div>
+        <div class="for-divider"></div>
+        <div class="for-item">
+          <div class="for-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#52B788" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div>You want a <strong>trusted finance partner</strong> — not just a report delivered once a month</div>
+        </div>
+      </div>
+      <div class="for-note">"We work primarily with manufacturers and operationally complex SMEs — businesses where getting the numbers right has a direct impact on profitability."</div>
+    </div>
+  </div>
+</div>
+
+<!-- POSITIONING BAND -->
+<div class="positioning-band">
+  <div class="positioning-inner">
+    <div>
+      <div class="pos-label">Our Positioning</div>
+      <blockquote class="pos-quote">"We help South African SMEs fix their financial and operational systems to improve cash flow, reduce costs, and scale efficiently."</blockquote>
+    </div>
+    <div class="pos-divider"></div>
+    <div>
+      <div class="pos-label">Target Market Focus</div>
+      <div class="pos-targets">
+        <div class="pos-target"><div class="pos-target-dot"></div>Manufacturing SMEs</div>
+        <div class="pos-target"><div class="pos-target-dot"></div>Operationally complex businesses</div>
+        <div class="pos-target"><div class="pos-target-dot"></div>Companies scaling beyond basic accounting systems</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THE OFFER -->
+<section id="offer" class="offer-section">
+  <div class="offer-header">
+    <div>
+      <div class="offer-eyebrow">Our One Offer</div>
+      <h2 class="offer-title">
+        Finance System Review<br>&amp; <em>Improvement Plan</em>
+      </h2>
+    </div>
+    <p class="offer-intro">
+      We don't try to sell you everything at once. Our starting engagement is focused, affordable, and gives you something concrete — a clear diagnosis of your financial systems and a practical plan to fix them. Everything else comes after this, if and when it makes sense.
+    </p>
+  </div>
+
+  <div class="offer-card">
+    <div class="offer-card-body">
+      <div class="offer-deliverables">
+        <div class="offer-section-label">What we do in 2–3 weeks</div>
+        <ul class="deliverable-list">
+          <li class="deliverable-item">
+            <div class="d-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#52B788" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Review your current financial processes, reporting, and systems end-to-end
+          </li>
+          <li class="deliverable-item">
+            <div class="d-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#52B788" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Identify the key inefficiencies, risks, and gaps costing you time and money
+          </li>
+          <li class="deliverable-item">
+            <div class="d-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#52B788" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Build a basic reporting or dashboard structure tailored to your business
+          </li>
+          <li class="deliverable-item">
+            <div class="d-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#52B788" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Recommend where smart tools and automation will save the most time
+          </li>
+          <li class="deliverable-item">
+            <div class="d-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#52B788" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Deliver a clear, prioritised action plan you can act on immediately
+          </li>
+        </ul>
+      </div>
+      <div class="offer-meta">
+        <div class="meta-row">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-val">2 – 3 weeks</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">Format</div>
+          <div class="meta-val">Remote or on-site (Gauteng &amp; nationwide)</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">Best suited for</div>
+          <div class="meta-val">Manufacturing and operational SMEs ready to get control of their finances</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">What you walk away with</div>
+          <div class="meta-val accent">Clarity, a plan &amp; a working dashboard</div>
+        </div>
+      </div>
+    </div>
+    <div class="offer-card-footer">
+      <div class="offer-card-footer-text">
+        <strong>No hard sell. No jargon.</strong> Just a straightforward engagement that gives you real answers about your business — and a clear path forward.
+      </div>
+      <a href="#contact" class="btn-primary">
+        Enquire Now
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="sec-header">
+    <div class="sec-eyebrow">What We Do</div>
+    <h2 class="sec-title">Five areas where we<br><em>improve performance</em></h2>
+    <p class="sec-sub">After the initial review, these are the areas we work in. Each is a natural next step — we never recommend work that isn't justified by what the review uncovers.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <div class="svc-name">Financial Systems Improvement</div>
+      <p class="svc-desc">Clean up and restructure your accounting setup so your data is accurate, timely, and actually useful for running your business.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">System clean-up</span>
+        <span class="svc-tag">Chart of accounts</span>
+        <span class="svc-tag">Reporting accuracy</span>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <div class="svc-name">Reporting &amp; Dashboards</div>
+      <p class="svc-desc">Clear, decision-focused management reports and KPI dashboards — built in Power BI or Excel — so leadership always knows what's happening in the business.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">Power BI</span>
+        <span class="svc-tag">KPI tracking</span>
+        <span class="svc-tag">Management accounts</span>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <div class="svc-name">Financial Modelling &amp; Forecasting</div>
+      <p class="svc-desc">Dynamic models for cash flow forecasting, scenario planning, and decision analysis — built in Excel with real data, not assumptions.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">Cash flow</span>
+        <span class="svc-tag">Scenario analysis</span>
+        <span class="svc-tag">Excel / VBA</span>
+      </div>
+    </div>
+
+    <div class="svc-card mfg">
+      <div class="svc-num">04</div>
+      <div class="svc-name">Operational Finance <span style="color:var(--mint);font-size:.85em;">· Manufacturing</span></div>
+      <p class="svc-desc">Costing models, margin analysis, and product profitability insight for manufacturers who need to know exactly what each job or product actually costs them.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">Job costing</span>
+        <span class="svc-tag">Margin analysis</span>
+        <span class="svc-tag">Product profitability</span>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-num">05</div>
+      <div class="svc-name">Process Efficiency</div>
+      <p class="svc-desc">We use smart tools and automation to eliminate manual, repetitive finance tasks — reducing errors, saving time, and freeing your team to focus on what matters.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">Power Automate</span>
+        <span class="svc-tag">Workflow design</span>
+        <span class="svc-tag">Manual task reduction</span>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-num">06</div>
+      <div class="svc-name">Fractional CFO Advisory</div>
+      <p class="svc-desc">Strategic finance support on a flexible basis — acting as your trusted finance partner for planning, performance management, and business decision-making.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">Business partnering</span>
+        <span class="svc-tag">Strategic planning</span>
+        <span class="svc-tag">Performance mgmt</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div>
+    <div class="sec-eyebrow">About</div>
+    <h2 class="about-title">
+      We don't just fix<br>systems. We improve<br><em>business performance.</em>
+    </h2>
+
+    <div class="cgma-badge">
+      <span class="cgma-mark">CGMA</span>
+      <div>
+        <div class="cgma-text-title">Chartered Global Management Accountant</div>
+        <div class="cgma-text-sub">BCom Accounting · CIMA Strategic Level</div>
+      </div>
+    </div>
+
+    <p class="about-body">
+      I'm a finance and business performance specialist with a BCom Accounting and the CGMA designation — the highest qualification awarded by CIMA, focused on strategic financial management.
+    </p>
+    <p class="about-body">
+      That means my work goes beyond fixing spreadsheets. I bring CGMA-level thinking to every engagement: understanding the financial levers that drive profitability, where value is being lost, and what decisions will actually move your business forward.
+    </p>
+    <p class="about-body">
+      I work primarily with South African manufacturers and operationally complex SMEs — businesses where the numbers are genuinely complicated and getting them right has a direct impact on the bottom line.
+    </p>
+
+    <div class="competency-grid">
+      <div class="comp-item">
+        <div class="comp-title">Strategic Decision-Making</div>
+        <div class="comp-desc">Translating financial data into clear, confident decisions</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-title">Cost Management &amp; Profitability</div>
+        <div class="comp-desc">Knowing your true costs and protecting your margins</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-title">Performance Measurement</div>
+        <div class="comp-desc">Building KPI systems that track what drives business value</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-title">Risk Management</div>
+        <div class="comp-desc">Identifying financial and operational risks early</div>
+      </div>
+      <div class="comp-item span2">
+        <div class="comp-title">Business Partnering</div>
+        <div class="comp-desc">Working alongside owners and management as a trusted partner — not just delivering reports</div>
+      </div>
+    </div>
+
+    <div class="cred-pills" style="margin-top:1.5rem;">
+      <span class="cred-pill">BCom Accounting</span>
+      <span class="cred-pill">CGMA · CIMA Strategic</span>
+      <span class="cred-pill">Advanced Excel &amp; VBA</span>
+      <span class="cred-pill">Financial Modelling</span>
+      <span class="cred-pill">Power BI</span>
+      <span class="cred-pill">Power Automate</span>
+    </div>
+  </div>
+
+  <div class="about-right">
+    <div class="distinction-box">
+      <div class="distinction-label">The key difference</div>
+      <div class="distinction-text">"Most consultants fix processes. A CGMA improves business performance. That's the level of thinking you're getting."</div>
+    </div>
+    <div class="about-stat-card">
+      <div class="stat-label">Why Manufacturing?</div>
+      <div class="stat-headline">Complexity creates opportunity</div>
+      <div class="stat-body">Manufacturers face costing challenges, margin pressure, and operational complexity that generic accounting advice can't solve. That's exactly where deep financial expertise creates the most value.</div>
+    </div>
+    <div class="about-stat-card">
+      <div class="stat-label">How We Use Technology</div>
+      <div class="stat-headline">Smart tools, practical outcomes</div>
+      <div class="stat-body">We use automation and digital tools to reduce manual work and improve efficiency — not as a product to sell you, but as a means to better financial control and faster reporting.</div>
+    </div>
+    <div class="about-stat-card">
+      <div class="stat-label">Our Promise</div>
+      <div class="stat-headline">No reports that gather dust</div>
+      <div class="stat-body">Every engagement ends with implemented systems, trained teams, and measurable results — not a PDF you read once and file away.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="process" class="process-section">
+  <div class="sec-header">
+    <div class="sec-eyebrow">How It Works</div>
+    <h2 class="sec-title">Simple. Structured.<br><em>Results-driven.</em></h2>
+    <p class="sec-sub">Four clear steps. No jargon. No unnecessary complexity. You'll always know where you are and what comes next.</p>
+  </div>
+  <div class="process-grid">
+    <div class="steps">
+      <div class="step">
+        <div class="step-left">
+          <div class="step-circle">1</div>
+          <div class="step-connector"></div>
+        </div>
+        <div>
+          <div class="step-title">Diagnose</div>
+          <p class="step-desc">We start by understanding your current financial processes, systems, reporting, and pain points — with no assumptions. We listen, observe, and ask the right questions.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-circle">2</div>
+          <div class="step-connector"></div>
+        </div>
+        <div>
+          <div class="step-title">Simplify</div>
+          <p class="step-desc">Before adding anything new, we remove complexity and fix what's broken. A clean, simple foundation always outperforms an elaborate one that nobody understands.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-circle">3</div>
+          <div class="step-connector"></div>
+        </div>
+        <div>
+          <div class="step-title">Automate</div>
+          <p class="step-desc">We use smart tools and automation to eliminate the manual tasks that consume time and introduce errors — targeted, practical, and integrated with your existing setup.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-circle">4</div>
+          <div class="step-connector"></div>
+        </div>
+        <div>
+          <div class="step-title">Enable</div>
+          <p class="step-desc">We build the reports, dashboards, and models that give your team real visibility — so every week you know where you stand on costs, cash flow, and performance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-box">
+      <div class="results-header">
+        <div class="results-header-label">What to expect</div>
+        <div class="results-header-title">Measurable outcomes</div>
+      </div>
+      <div class="result-items">
+        <div class="result-item">
+          <div class="result-dot"></div>
+          <div class="result-text">
+            <strong>Faster, more accurate reporting</strong>
+            Month-end that takes days, not weeks — with fewer errors and more confidence in the numbers.
+          </div>
+        </div>
+        <div class="result-item">
+          <div class="result-dot"></div>
+          <div class="result-text">
+            <strong>Real visibility into your business</strong>
+            Clear dashboards and reports your team actually uses — not spreadsheets that live on one person's laptop.
+          </div>
+        </div>
+        <div class="result-item">
+          <div class="result-dot"></div>
+          <div class="result-text">
+            <strong>Control over costs and margins</strong>
+            Know what each product, job, or service actually costs — and price and plan accordingly.
+          </div>
+        </div>
+        <div class="result-item">
+          <div class="result-dot"></div>
+          <div class="result-text">
+            <strong>Less manual work</strong>
+            Repetitive finance tasks automated so your team spends time on decisions, not data entry.
+          </div>
+        </div>
+        <div class="result-item">
+          <div class="result-dot"></div>
+          <div class="result-text">
+            <strong>Systems that scale with you</strong>
+            Financial infrastructure built to grow alongside your business — not hold it back.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div>
+    <div class="sec-eyebrow">Get in Touch</div>
+    <h2 class="contact-title">
+      Let's talk about<br>your <em>business.</em>
+    </h2>
+    <p class="contact-body">
+      Book a free 30-minute discovery call. We'll review your biggest financial and operational challenges — and tell you honestly whether and how we can help. No pitch, no pressure.
+    </p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M1.5 3.5l6 4 6-4" stroke="#52B788" stroke-width="1.2" stroke-linecap="round"/><rect x=".8" y="3" width="13.4" height="9" rx="1.8" stroke="#52B788" stroke-width="1.2"/></svg></div>
+        <div><div class="contact-item-label">Email</div><div class="contact-item-val">info@stratforgefinancial.co.za</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 1.5h2.8l1.4 3-1.8 1.3a9 9 0 004 4l1.3-1.8 3 1.4v2.8c0 .5-.4.8-.9.8C5.6 13 2 9.4 2 5.4c0-.5.4-.9.9-.9h-.4" stroke="#52B788" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        <div><div class="contact-item-label">Phone</div><div class="contact-item-val">+27 11 000 0000</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="6.5" r="2.5" stroke="#52B788" stroke-width="1.2"/><path d="M7.5 1C4.5 1 2 3.5 2 6.5c0 4 5.5 8 5.5 8s5.5-4 5.5-8C13 3.5 10.5 1 7.5 1z" stroke="#52B788" stroke-width="1.2"/></svg></div>
+        <div><div class="contact-item-label">Location</div><div class="contact-item-val">Johannesburg, Gauteng · Available nationwide</div></div>
+      </div>
+    </div>
+    <div class="free-call-box">
+      <div class="free-call-title">Free Discovery Call Includes</div>
+      <div class="free-call-text">A review of your top financial and operational challenges, honest feedback on where the biggest improvements are, and a clear recommended first step — all in 30 minutes at no cost.</div>
+    </div>
+  </div>
+
+  <form class="contact-form" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="Your first name" required/></div>
+      <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Your last name" required/></div>
+    </div>
+    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="you@yourbusiness.co.za" required/></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Business Name</label><input type="text" class="form-input" placeholder="Your company"/></div>
+      <div class="form-group">
+        <label class="form-label">Industry</label>
+        <select class="form-select form-input">
+          <option value="" disabled selected>Select industry</option>
+          <option>Manufacturing</option>
+          <option>Retail / Distribution</option>
+          <option>Construction / Engineering</option>
+          <option>Services</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">What can we help with?</label>
+      <select class="form-select form-input">
+        <option value="" disabled selected>Select a service</option>
+        <option>Finance System Review &amp; Improvement Plan</option>
+        <option>Financial Systems Improvement</option>
+        <option>Reporting &amp; Dashboards</option>
+        <option>Financial Modelling &amp; Forecasting</option>
+        <option>Operational Finance / Costing (Manufacturing)</option>
+        <option>Process Efficiency &amp; Automation</option>
+        <option>Fractional CFO Advisory</option>
+        <option>Not sure — need guidance</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Biggest Challenge</label><textarea class="form-textarea" placeholder="What's taking too much time? Where are you losing visibility? What does better look like for your business?"></textarea></div>
+    <button type="submit" class="form-submit">Send Message →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-logo-icon">
+      <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3 13L7 7l3.5 3.5L15 3" stroke="#0E0F0D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <span class="footer-logo-name">StratForge<span> Financial Services</span></span>
+  </div>
+  <div class="footer-copy">© 2025 StratForge Financial Services · BCom Accounting · CGMA · Johannesburg, South Africa</div>
+  <div class="footer-links">
+    <a href="#offer">Our Offer</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // Form submit handler
+  function handleSubmit(e) {
+    e.preventDefault();
+    var btn = e.target.querySelector('.form-submit');
+    var original = btn.textContent;
+    btn.textContent = '\u2713 Message received \u2014 we\u2019ll be in touch shortly';
+    btn.style.background = '#1f5c42';
+    btn.style.color = '#f2ede3';
+    setTimeout(function() {
+      btn.textContent = original;
+      btn.style.background = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 4000);
+  }
+</script>
+</body>
+</html>
