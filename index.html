@@ -832,7 +832,10 @@
     </div>
 
     <!-- FORM SETUP: This form posts to Formspree, which forwards every submission to info@stratforgefinancialservices.co.za. -->
-    <form class="reveal" id="contactForm" style="transition-delay:.1s;" action="https://formspree.io/f/xljrnzde" method="POST">
+    <form class="reveal" id="contactForm" style="transition-delay:.1s;" action="https://formsubmit.co/info@stratforgefinancialservices.co.za" method="POST">
+      <input type="hidden" name="_subject" value="New StratForge website enquiry">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://stratforgefinancialservices.co.za/thank-you.html">
       <div class="field">
         <label for="fname">First Name</label>
         <input id="fname" name="First Name" type="text" required>
@@ -1005,27 +1008,7 @@
     counterObs.observe(el);
   });
 
-  // Contact form — submits to Formspree, which forwards to info@stratforgefinancialservices.co.za
-  const contactForm = document.getElementById('contactForm');
-  const formNote = document.getElementById('formNote');
-  contactForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    formNote.textContent = "Sending…";
-    fetch(contactForm.action, {
-      method: 'POST',
-      body: new FormData(contactForm),
-      headers: { 'Accept': 'application/json' }
-    }).then(response => {
-      if (response.ok) {
-        formNote.textContent = "Thanks — we've received your enquiry and will reply within one business day.";
-        contactForm.reset();
-      } else {
-        formNote.textContent = "Something went wrong. Please email info@stratforgefinancialservices.co.za directly.";
-      }
-    }).catch(() => {
-      formNote.textContent = "Something went wrong. Please email info@stratforgefinancialservices.co.za directly.";
-    });
-  });
+  // Contact form uses FormSubmit. The visitor is redirected to the thank-you page after submission.
 </script>
 </body>
 </html>
